@@ -88,7 +88,7 @@ async function setupContext(input_node) {
       await audioContext.resume()
     }
 
-    input_node.node =guitar
+    input_node.node = guitar
   }
   
   function getGuitar() {
