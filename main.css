@@ -1,18 +1,13 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
 body {
     background-color: #DBDBDB;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: none;
   }
 
   .controls {
@@ -51,7 +46,32 @@ input {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
+
+  
+  #center {
+    position: absolute;
+    width: 200px;
+    height: 230px;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    
+  }
+  
+
+.input-node{
+    width: 100%;
+    height: 150px;
+    background-color: #413620;
+}
+.reverb{
+  width: 100%;
+  height: 150px;
+  background-color: rgb(208, 150, 44);
+}
+
 .tuner{
     width: 100%;
     height: 100px;

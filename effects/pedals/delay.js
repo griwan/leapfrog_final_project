@@ -1,3 +1,4 @@
+import AudioConnector from "../audioConnector.js";
 class Delay extends AudioConnector {
     constructor(audioContext) {
         super(audioContext);
@@ -38,3 +39,5 @@ class Delay extends AudioConnector {
     return node;
     }
 };
+
+export default Delay;

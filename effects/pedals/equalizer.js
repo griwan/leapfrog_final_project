@@ -41,25 +41,6 @@ class Equalizer{
       return s;
     }
 }
-class Slider{
-    constructor(){
-        this.parent = document.getElementsByClassName('range-slider')[0]
-        this.element = document.createElement('input');
-        this.element.min = '-10';
-        this.element.max = '10';
-        this.element.value = '0';
-        this.element.classList.add("input-range");
-        this.element.type ='range';
-        this.element.id = 'name';
-        this.parent.appendChild(this.element)
-        console.log(this.element)
-    }
-    createEvent(f){
-        this.element.addEventListener('input',e=>{
-            f(e.target.value);
-        })
-    }
-}
 
 
 
