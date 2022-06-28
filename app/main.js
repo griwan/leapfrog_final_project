@@ -1,14 +1,16 @@
-  import Input from './effects/pedals/input.js';
-  import Output from './effects/pedals/output.js';
-  import Delay from './effects/pedals/delay.js';
-  import Reverb  from './effects/pedals/reverb.js';
-  import Disortion from './effects/pedals/distortion.js'
+  import Input from '/effects/pedals/input.js';
+  import Output from '/effects/pedals/output.js';
+  import Delay from '/effects/pedals/delay.js';
+  import Reverb  from '/effects/pedals/reverb.js';
+  import Disortion from '/effects/pedals/distortion.js';
+
   const audioContext = new AudioContext();
   const input = new Input(audioContext);
   const output = new Output(audioContext);
   const delay = new Delay(audioContext);
   const reverb = new Reverb(audioContext);
   const distortion = new Disortion(audioContext);
+  
 //   reverb.getInputResponseFile('./IMreverbs/Large Bottle Hall.wav').then(buffer => {
 //     reverb.set_buffer(buffer)
 //   });
