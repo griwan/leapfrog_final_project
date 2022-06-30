@@ -1,8 +1,17 @@
 import AudioConnector from "../audioConnector.js";
 import Slider from "../../items/slider.js";
 class Reverb extends AudioConnector {
-    constructor(audioContext, buffer) {
+    constructor(audioContext,data) {
         super(audioContext);
+        this.data = data || {
+            name:"reverb",
+            params:{
+             wet:0.5,
+             level:1,
+             room:1
+
+            }
+        };
         this.element = document.createElement('div');
         this.element.classList.add('effects-container');
         let h = document.createElement('h1');
@@ -32,37 +41,42 @@ class Reverb extends AudioConnector {
 
         // Set the output gain-node as the output-node.
         this.output = this.nodes['outputGainNode'];
+        this.level = this.data.params.level;
+
         this.nodes['outputGainNode'].gain.value = 1;
-        // Set the default wetness to 0.5
-        this.wet = 0.5;
+       
+        this.wet = this.data.params.wet;
         this.nodes['wetGainNode'].gain.value = this.wet;
-        // Set the default level to 1
-        this.level = 1;
-        this.roomSize = 1;
+       
+    
+        this.roomSize =this.data.params.room;
         this.nodes['levelGainNode'].gain.value = this.level;
         this.buffer = this.impulseResponse(this.roomSize,10,false);
         this.nodes['convolverNode'].buffer = this.buffer;
 
-        this.sliderRoom  = new Slider(this.element,this.roomSize,1);
+        this.sliderRoom  = new Slider(this.element,this.roomSize,1,"Room Size");
         this.sliderRoom.createEvent(this.setRoom.bind(this))
 
-        this.sliderWet  = new Slider(this.element,this.nodes.wetGainNode.gain.value,0.1);
-        this.sliderWet.createEvent(this.setRoom.bind(this))
+        this.sliderWet  = new Slider(this.element,this.nodes.wetGainNode.gain.value,0.1,"Wet/Dry");
+        this.sliderWet.createEvent(this.setWet.bind(this))
 
-        this.sliderGain  = new Slider(this.element,this.nodes.levelGainNode.gain.value,0.1);
-        this.sliderGain.createEvent(this.setRoom.bind(this))
+        this.sliderGain  = new Slider(this.element,this.nodes.levelGainNode.gain.value,0.1,"Gain");
+        this.sliderGain.createEvent(this.setLevel.bind(this))
       
  
     }
     setRoom(val){
         this.buffer = this.impulseResponse(val,10,false);
         this.nodes['convolverNode'].buffer = this.buffer;
+        this.data.params.room = val;
     }
     setWet(val){
         this.nodes.wetGainNode.gain.value = val/10;
+        this.data.params.wet = val/10;
     }
     setLevel(val){
         this.nodes.levelGainNode.gain.value= val/10;
+        this.data.params.level = val/10;
     }
     impulseResponse( duration, decay, reverse ) {
     var sampleRate = this.audioContext.sampleRate;

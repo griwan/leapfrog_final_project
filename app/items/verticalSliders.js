@@ -1,4 +1,4 @@
-class Slider{
+class VerticalSlider{
     constructor(parent,value,mul,name){
         this.parent = parent;
         this.child= document.createElement('div');
@@ -9,7 +9,7 @@ class Slider{
         this.element.name = name;
         this.element.value = `${value*1/mul}`; 
         this.element.type ='range';
-        
+        this.element.classList.add('vertical-slider');
         this.label = document.createElement('label');
         this.label.for = name;
         this.label.innerHTML=name;
@@ -24,4 +24,4 @@ class Slider{
         })
     }
 }
-export default Slider;
+export default VerticalSlider;

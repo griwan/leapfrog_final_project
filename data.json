@@ -1,0 +1,32 @@
+[
+    {
+        "name": "input",
+        "params": {
+            "gain": "9"
+        }
+    },
+    {
+        "name": "tuner",
+        "params": {}
+    },
+    {
+        "name": "reverb",
+        "params": {
+            "wet": 0.5,
+            "level": 1,
+            "room": 1
+        },
+        "room": "8"
+    },
+    {
+        "name": "distortion",
+        "params": {
+            "intensity": 600,
+            "gain": 0.4
+        }
+    },
+    {
+        "name": "output",
+        "params": {}
+    }
+]

@@ -1,8 +1,14 @@
 import AudioConnector from "../audioConnector.js";
 
 class Tuner extends AudioConnector {
-    constructor(audioContext) {
+    constructor(audioContext,data) {
         super(audioContext);
+        this.data = data || {
+            name:"tuner",
+            params:{
+             
+            }
+        };
         this.lastnote = "A";
         this.noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
         this.parent =  document.getElementsByClassName('amplifier')[0];

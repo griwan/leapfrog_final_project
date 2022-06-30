@@ -25,7 +25,8 @@ class AudioConnector {
     }
 
     destroy(){
-        return this.disconnect();
+    
+        this.parent.removeChild(this.element);
     }
 }
 

@@ -3,11 +3,19 @@ import AudioConnector from "../audioConnector.js";
 import Slider from "../../items/slider.js";
 
 class Distortion extends AudioConnector {
-    constructor(audioContext) {
+    constructor(audioContext,data) {
         super(audioContext);
+
+        this.data = data || {
+            name:"distortion",
+            params:{
+                intensity:600,
+                gain:0.4,
+            }
+        };
         this.buffer = null;
  
-        
+    
         this.element = document.createElement('div');
         this.element.classList.add('effects-container');
         let h = document.createElement('h1');
@@ -46,10 +54,10 @@ class Distortion extends AudioConnector {
         this.output = this.nodes['biquadFilterNode'];
 
         // The default intensity is 100.
-        this.intensity = 600;
+        this.intensity = this.data.params.intensity;
 
 
-        this.gain = 0.5;
+        this.gain = this.data.params.gain;
 
     
    
@@ -57,10 +65,10 @@ class Distortion extends AudioConnector {
         this.nodes['gainNode'].gain.value = this.gain;
         this.nodes['gainNode2'].gain.value = 1 / this.gain;
         
-        this.sliderIntensity  = new Slider(this.element,this.intensity,100);
+        this.sliderIntensity  = new Slider(this.element,this.intensity,100,"Intensity");
         
         this.sliderIntensity.createEvent(this.setIntensity.bind(this))
-        this.sliderGain  = new Slider(this.element,this.nodes.gainNode.gain.value,0.1);
+        this.sliderGain  = new Slider(this.element,this.nodes.gainNode.gain.value,0.1,"Gain");
         
         this.sliderGain.createEvent(this.setGain.bind(this))
 
@@ -68,10 +76,12 @@ class Distortion extends AudioConnector {
  
     setIntensity(val){
         this.nodes.waveshaper.curve = this.calculateDistortionCurve(val*100);
+        this.data.intensity =  this.val*100;
     }
     setGain(val){
         this.nodes.gainNode.gain.value = val/10;
         this.nodes.gainNode2.gain.value = Math.floor(1/(val/10));
+        this.data.gain = val/10;
     }
     
     calculateDistortionCurve(intens){
