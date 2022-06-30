@@ -66,7 +66,7 @@ class Amplifier{
     
     }
     async saveSession(fname){
-      const response  = await fetch('http://localhost:3000/save', {
+      const response  = await fetch('http://127.0.0.1 /save', {
      method: 'POST',
      headers: {
       'Accept': 'application/json',

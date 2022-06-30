@@ -21,7 +21,7 @@ const metronome = new Metronome(audioContext);
 async function getapi() {
     
   // Storing response
-const response  = await fetch('http://localhost:3000/get_saves/', {
+const response  = await fetch('http://127.0.0.1 /get_saves/', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

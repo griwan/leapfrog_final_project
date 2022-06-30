@@ -10,13 +10,13 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/get_saves", (req, res) => {
-	fs.readFile(__dirname + '/' + 'saves.json', 'utf8', (err, data) => {
+	fs.readFile(path.join(__dirname, '/saves.json'), 'utf8', (err, data) => {
 		res.end(data);
 	});
 });
 app.post('/save', function (req, res) {
 	
-	fs.readFile(__dirname + '/' + 'saves.json', 'utf8', (err, data) => {
+	fs.readFile(path.join(__dirname, '/saves.json'), 'utf8', (err, data) => {
 		let temp = JSON.parse(data);
 		console.log(req.body)
 		temp.push(req.body);
