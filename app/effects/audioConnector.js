@@ -8,14 +8,20 @@ class AudioConnector {
         this.node = node;
     }
     set_output(output) {
+        this.element.display = "none";
         this.outputNode = output;
     }
+    connect(node) {
 
+        this.output.connect(node.node);
     
-    disconnect(){
-    this.node.disconnect();
+        return node;
+        }
+    
+    disconnect(node){
+    this.output.disconnect(node.node);
+    
 
-    return this.node;
     }
 
     destroy(){

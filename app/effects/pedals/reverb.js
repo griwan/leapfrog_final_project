@@ -1,9 +1,10 @@
 import AudioConnector from "../audioConnector.js";
+import Slider from "../../items/slider.js";
 class Reverb extends AudioConnector {
     constructor(audioContext, buffer) {
         super(audioContext);
         this.element = document.createElement('div');
-        this.element.classList.add('reverb');
+        this.element.classList.add('effects-container');
         let h = document.createElement('h1');
         h.innerHTML = 'Reverb';
         this.element.appendChild(h);
@@ -37,11 +38,32 @@ class Reverb extends AudioConnector {
         this.nodes['wetGainNode'].gain.value = this.wet;
         // Set the default level to 1
         this.level = 1;
+        this.roomSize = 1;
         this.nodes['levelGainNode'].gain.value = this.level;
-        this.buffer = this.impulseResponse(2,5,false);
+        this.buffer = this.impulseResponse(this.roomSize,10,false);
+        this.nodes['convolverNode'].buffer = this.buffer;
+
+        this.sliderRoom  = new Slider(this.element,this.roomSize,1);
+        this.sliderRoom.createEvent(this.setRoom.bind(this))
+
+        this.sliderWet  = new Slider(this.element,this.nodes.wetGainNode.gain.value,0.1);
+        this.sliderWet.createEvent(this.setRoom.bind(this))
+
+        this.sliderGain  = new Slider(this.element,this.nodes.levelGainNode.gain.value,0.1);
+        this.sliderGain.createEvent(this.setRoom.bind(this))
+      
+ 
+    }
+    setRoom(val){
+        this.buffer = this.impulseResponse(val,10,false);
         this.nodes['convolverNode'].buffer = this.buffer;
     }
-
+    setWet(val){
+        this.nodes.wetGainNode.gain.value = val/10;
+    }
+    setLevel(val){
+        this.nodes.levelGainNode.gain.value= val/10;
+    }
     impulseResponse( duration, decay, reverse ) {
     var sampleRate = this.audioContext.sampleRate;
     var length = sampleRate * duration;
@@ -59,24 +81,6 @@ class Reverb extends AudioConnector {
     return impulse;
     }
 
-    getInputResponseFile(file){
-        return fetch(file, {
-            method: 'get'
-        }).then(response => {
-            return response.arrayBuffer();
-        });
-    }
-
-
-
-
-
-
-  
-
-
-
-
     set_buffer(buffer) {
         this.audioContext.decodeAudioData(buffer, buffer => {
             // Set the internal buffer value
@@ -86,12 +90,7 @@ class Reverb extends AudioConnector {
            this.nodes['convolverNode'].buffer = this.buffer;
         });
     }
-    connect(node) {
 
-        this.output.connect(node.node);
-    
-        return node;
-        }
 };
 
 

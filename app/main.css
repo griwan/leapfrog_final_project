@@ -9,7 +9,11 @@ body {
     flex-direction: column;
     align-items: center;
   }
-
+  .container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
   .controls {
     display: grid;
     grid-template-columns: repeat(10,auto);
@@ -48,8 +52,17 @@ input {
     margin-right: auto;
     position: relative;
 }
-
-  
+  .btn{
+    padding:20px;
+    margin:10px;
+  }
+  .menu{
+    width: 20%;
+   
+    background-color: #413620;
+    display:flex;
+    flex-direction: column;
+  }
   #center {
     position: absolute;
     width: 200px;
@@ -72,19 +85,35 @@ input {
   background-color: rgb(208, 150, 44);
 }
 
-.tuner{
-    width: 100%;
-    height: 100px;
+.delay{
+  width: 100%;
+  height: 150px;
+  background-color: rgb(115, 80, 176);
+}
+.effects-node,.controls{
+  
+}
 
-    background-color: #C5AFA4;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+.tuner{
+  position: relative;
+  color: white;
+  background-color: #3D3D4A;
+  border-radius: 10px;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5), 0px -2px 40px rgba(0, 0, 0, 0.3);
+  min-width: 280px;
+  height: 30vh;
+  padding-bottom: 50px;
+  padding-top:50px;
+  background-color: #C5AFA4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 .tuner .display{
+  position: relative;
     width: 20%;
-    height: 4vh;
+   
 
     color:black;
     text-align: center;
@@ -92,7 +121,7 @@ input {
 }
 .tuner .cents{
     width: 60%;
-    height: 1vh;
+    
 
     background-color: #413620;
     position: relative;
@@ -101,7 +130,7 @@ input {
     width: 2%;
     height: 4vh;
     position: absolute;
-    top:-1.5vh;
+    top:-4.5vh;
     left:0;
     background-color: rgb(136, 136, 48);
 }
@@ -179,3 +208,194 @@ input {
    .ruler .cm:nth-of-type(11):after {
     content: "+50";
    }
+
+   .effects-container{
+    position: relative;
+    color: white;
+    background-color: #3D3D4A;
+    border-radius: 10px;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.5), 0px -2px 40px rgba(0, 0, 0, 0.3);
+    min-width: 280px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 50px;
+    padding-top:50px;
+   }
+
+
+  
+  .equalizer {
+
+  }
+  
+
+  
+
+
+  .equalizer  .sliders {
+    position: relative;
+    display: inline-block;
+  }
+  .equalizer  .sliders .range-slider {
+    display: inline-block;
+    width: 80px;
+    position: relative;
+    height: 300px;
+  
+  }
+ 
+  .equalizer  .sliders .range-slider::after {
+    position: absolute;
+    bottom: -24px;
+    left: calc(50% - 2em);
+    font-size: 80%;
+    color: #8e8e9b;
+    content: "32";
+    width: 4em;
+    text-align: center;
+  }
+  .equalizer  .sliders .range-slider:nth-child(2)::after {
+    content: "32";
+  }
+  .equalizer  .sliders .range-slider:nth-child(3)::after {
+    content: "64";
+  }
+  .equalizer  .sliders .range-slider:nth-child(4)::after {
+    content: "128";
+  }
+  .equalizer  .sliders .range-slider:nth-child(5)::after {
+    content: "256";
+  }
+  .equalizer  .sliders .range-slider:nth-child(6)::after {
+    content: "512";
+  }
+  .equalizer  .sliders .range-slider:nth-child(7)::after {
+    content: "1K";
+  }
+  .equalizer  .sliders .range-slider:nth-child(8)::after {
+    content: "2K";
+  }
+  .equalizer  .sliders .range-slider-thumb {
+    opacity: 1;
+    position: absolute;
+    left: 30px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background-color: white;
+    color: #8376FF;
+    text-align: center;
+    font-size: 40%;
+    box-shadow: 0 0 2px #373641;
+    border-radius: 50%;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 2;
+  }
+ 
+  .equalizer  .sliders .range-slider-bar {
+    left: 38px;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(#9791B8, #8376FF);
+    pointer-events: none;
+    width: 4px;
+    border-radius: 10px;
+    opacity: 1;
+  }
+
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical] {
+    position: relative;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    -ms-writing-mode: bt-lr;
+        writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-runnable-track, .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-runnable-track {
+    border: none;
+    background: #343440;
+    width: 4px;
+    border-color: #343440;
+    border-radius: 10px;
+
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-moz-range-track {
+    border: none;
+    background: #343440;
+    width: 4px;
+    border-color: #343440;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px #3D3D4A;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-ms-track {
+    border: none;
+    background: #343440;
+    width: 4px;
+    border-color: #343440;
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px #3D3D4A;
+    color: transparent;
+    height: 100%;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-ms-fill-lower, .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-ms-fill-upper, .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-ms-tooltip {
+    display: none;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-webkit-slider-thumb {
+    left: -20px;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-moz-range-thumb {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+  }
+  .equalizer  .sliders .range-slider input[type=range][orient=vertical]::-ms-thumb {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+  }
+  .equalizer  .sliders svg {
+    z-index: 1;
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 1;
+  }
+  
+  @media (min-width: 800px) {
+    .equalizer  .sliders svg .line-shadow {
+      display: block;
+    }
+  }
+  
+  .design-reference {
+    position: fixed;
+    bottom: 6px;
+    right: 6px;
+    color: #8e8e9b;
+    font-size: 70%;
+    display: none;
+  }
+  @media (min-height: 600px) {
+    .design-reference {
+      display: block;
+    }
+  }

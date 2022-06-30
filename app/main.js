@@ -3,17 +3,40 @@
   import Delay from '/effects/pedals/delay.js';
   import Reverb  from '/effects/pedals/reverb.js';
   import Disortion from '/effects/pedals/distortion.js';
+  import Tuner from '/effects/pedals/tuner.js';
+  import Equalizer from './effects/pedals/equalizer.js';
+  import Amplifer from './items/Amplifer.js';
 
-  const audioContext = new AudioContext();
-  const input = new Input(audioContext);
-  const output = new Output(audioContext);
-  const delay = new Delay(audioContext);
-  const reverb = new Reverb(audioContext);
-  const distortion = new Disortion(audioContext);
-  
-//   reverb.getInputResponseFile('./IMreverbs/Large Bottle Hall.wav').then(buffer => {
-//     reverb.set_buffer(buffer)
-//   });
+import Amplifier from './items/Amplifer.js';
+
+
+  const initData = [
+    {
+      
+     object:Input,
+      gain:0.5
+    },
+    {
+      object:Tuner,
+    
+    },
+    {
+      object:Output
+    }
+  ]
+
+const audioContext = new AudioContext();
+const amp = new Amplifier();
+
+// let effects = []
+
+
+
+// initData.forEach(e=>{
+//   effects.push(new e.object(audioContext))
+
+// })
+
   setupContext()
   
   
@@ -23,9 +46,12 @@
           await audioContext.resume()
       }
  
-      input.set_input(guitar)
-   
-      input.connect(distortion).connect(reverb).connect(delay).connect(output);
+      // effects[0].set_input(guitar)
+      amp.init(audioContext,initData,guitar);
+      amp.effectsConnect();
+     
+      
+     
 
      
       
@@ -41,6 +67,3 @@
       })
   }
   
-
-
-

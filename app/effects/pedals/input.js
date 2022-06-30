@@ -6,36 +6,33 @@ class Input extends AudioConnector {
         super(audioContext);
 
         this.element = document.createElement('div');
-        this.element.classList.add('input-node');
+        this.element.classList.add('effects-container');
         let h = document.createElement('h1');
         h.innerHTML = 'Input';
         this.element.appendChild(h);
-        this.inputGainNode = audioContext.createGain(),
+        this.output = audioContext.createGain(),
         this.parent = document.getElementsByClassName('amplifier')[0];
         this.parent.appendChild(this.element);
-        this.inputGainNode.gain.value = 0;
+      
+        this.output.gain.value = 5;
+        this.node = this.output;
         this.connections = [];
-        this.slider  = new Slider(this.element);
+        this.slider  = new Slider(this.element,this.output.gain.value,1);
  
         this.slider.createEvent(this.set_gain.bind(this)
         )
 
     }
     set_gain(val){
-        this.inputGainNode.gain.value = val/10;
+       this.output.gain.value = val;
     }
     set_input(stream) {
         
-        this.node = this.audioContext.createMediaStreamSource(stream);
-        this.node.connect(this.inputGainNode);
+       this.input = this.audioContext.createMediaStreamSource(stream);
+       this.input.connect(this.output);
     }
 
-    connect(node) {
 
-        this.inputGainNode.connect(node.node);
-    
-        return node;
-        }
 }
 
 export default Input;

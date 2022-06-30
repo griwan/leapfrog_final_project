@@ -1,3 +1,5 @@
+import AudioConnector from "../audioConnector.js";
+
 class Tuner extends AudioConnector {
     constructor(audioContext) {
         super(audioContext);
@@ -8,6 +10,10 @@ class Tuner extends AudioConnector {
 
         this.element = document.createElement('div');
         this.element.classList.add('tuner');
+
+        let h = document.createElement('h1');
+        h.innerHTML = 'Tuner';
+        this.element.appendChild(h);
         
         this.display = document.createElement('div');
         this.display.classList.add('display');
@@ -64,12 +70,7 @@ class Tuner extends AudioConnector {
     centsOffFromPitch( frequency, note ) {
         return Math.floor( 1200 * Math.log( frequency / this.frequencyFromNoteNumber( note ))/Math.log(2) );
     }
-   connect(node) {
 
-    this.output.connect(node.node);
-
-    return node;
-    }
     update(){
 
         this.nodes['analyser'].getFloatTimeDomainData(this.buf );
@@ -139,3 +140,5 @@ class Tuner extends AudioConnector {
     }
     
 }
+
+export default Tuner;

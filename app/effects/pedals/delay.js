@@ -1,7 +1,16 @@
 import AudioConnector from "../audioConnector.js";
+import Slider from "../../items/slider.js";
 class Delay extends AudioConnector {
     constructor(audioContext) {
         super(audioContext);
+        this.element = document.createElement('div');
+        this.element.classList.add('effects-container');
+        let h = document.createElement('h1');
+        h.innerHTML = 'Delay';
+        this.element.appendChild(h);
+   
+        this.parent = document.getElementsByClassName('amplifier')[0];
+        this.parent.appendChild(this.element);
 
         this.nodes = {
             inputGainNode: audioContext.createGain(), // Create the input and output nodes of the effect
@@ -28,16 +37,29 @@ class Delay extends AudioConnector {
         this.nodes['delayNode'].delayTime.value = 0.5
         this.nodes['durationGainNode'].gain.value = 0.3;
 
-    }
+        this.sliderWet  = new Slider(this.element,this.nodes.wetGainNode.gain.value,0.1);
  
+        this.sliderWet.createEvent(this.setWet.bind(this))
+        this.sliderTime  = new Slider(this.element,this.nodes.delayNode.delayTime.value,0.1);
+ 
+        this.sliderTime.createEvent(this.setTime.bind(this))
+        this.sliderDuration  = new Slider(this.element,this.nodes.durationGainNode.gain.value,0.1);
+ 
+        this.sliderDuration.createEvent(this.setDuration.bind(this))
+
+    }
+    setWet(val){
+        this.nodes.wetGainNode.gain.value = val/10;
+    }
+    setTime(val){
+        this.nodes.delayNode.delayTime.value = val/10;
+    }
+    setDuration(val){
+        this.nodes.durationGainNode.gain.value = val/10;
+    }
 
     
-   connect(node) {
 
-    this.output.connect(node.node);
-
-    return node;
-    }
 };
 
 export default Delay;
