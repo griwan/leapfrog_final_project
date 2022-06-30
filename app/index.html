@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="main.css">
-  <style>
-  
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="overlay">
+        <h2>====Guitar Amp Simulator====</h2>
+      </div>
+      <div class="menu"></div>
+      <div class="amplifier">
+        <div class="audio-player">
+          <label class="custom-file-upload">
+            <input type="file" id="upload" />
+            Load Backing Track
+          </label>
 
-<div class="container">
-  <div class="overlay">
-    
-  </div>
-  <div class="menu">
-      
-  </div>
-  <div class="amplifier">
-    <div class="audio-player">
-      <label class="custom-file-upload">
-      <input type="file" id="upload" />
-        Load Backing Track
-    </label>
-     
-        <audio id="audio" controls>
-          <source src="" id="src" />
+          <audio id="audio" controls>
+            <source src="" id="src" />
+          </audio>
+        </div>
+        <div class="metronome"></div>
+      </div>
+      <div class="audio-recorder">
+        <button id="recordButton">Record/Stop</button>
+        <audio id="audio-record" controls>
+          <source src="" id="recordings" />
         </audio>
+      </div>
     </div>
-    <div class="metronome">
-      
-    </div>
-  </div>
-</div>
 
-
-
-
- <script type="module" src="main.js"></script>
- 
-
-</body>
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
