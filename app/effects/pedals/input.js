@@ -20,7 +20,7 @@ class Input extends AudioConnector {
         this.parent = document.getElementsByClassName('amplifier')[0];
         this.parent.appendChild(this.element);
       
-        this.output.gain.value = this.data.params.gain || 5;
+        this.output.gain.value = this.data.params.gain;
         this.node = this.output;
         this.connections = [];
         this.slider  = new Slider(this.element,this.output.gain.value,1,"Gain");

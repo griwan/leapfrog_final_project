@@ -24,13 +24,14 @@ async function getapi() {
 const response  = await fetch('http://localhost:3000/get_saves/', {
     method: 'GET',
     headers: {
-     
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
   });
   
   // Storing data in form of JSON
   var data = await response.json();
-  console.log(data[0].effects);
+ 
   getUserInput(data);
       // data[0].effects;
 
@@ -58,7 +59,7 @@ function getUserInput(temp){
 
   overlay.appendChild(label).appendChild(select);
   select.onchange = (e)=>{
-    console.log(select.value)
+    
     initData = temp[select.value].effects
     setupContext()
     overlay.style.display = "none";

@@ -1,9 +1,13 @@
 const express = require("express");
 const path = require("path")
 const fs = require("fs");
+const cors = require('cors');
+
 const app = express();
+
 app.use(express.static("./app"));
 app.use(express.json()); 
+app.use(cors());
 
 app.get("/get_saves", (req, res) => {
 	fs.readFile(__dirname + '/' + 'saves.json', 'utf8', (err, data) => {

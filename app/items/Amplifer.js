@@ -9,21 +9,17 @@ import Output from "../effects/pedals/output.js";
 class Amplifier{
     init(audioContext,data,output){
        
-        this.data = [...data];
-        this.default = this.mapClasses(data);
+        this.data = data;
+        this.default = JSON.parse(JSON.stringify(data))
         this.effects = [];
         this.output = output;
         this.audioContext = audioContext;
         this.element = document.getElementsByClassName('menu')[0];
-       
+        
         this.createMenu();
      
-  
-        this.default.forEach(e=>{
-          
-          this.effects.push(new e.class(this.audioContext,e))
-        
-        })
+        this.mapClasses(data);
+
         this.effects[0].set_input(this.output);
      
     }
@@ -31,25 +27,25 @@ class Amplifier{
       d.forEach(e=>{
         switch(e.name){
           case "input":
-            e.class = Input
+            this.effects.push(new Input(this.audioContext,e))
             break;
           case "output":
-            e.class = Output
+            this.effects.push(new Output(this.audioContext,e))
             break;
             case "delay":
-              e.class = Delay
+            this.effects.push(new Delay(this.audioContext,e))
               break;
           case "tuner":
-            e.class = Tuner
+            this.effects.push(new Tuner(this.audioContext,e))
             break;
             case "distortion":
-              e.class = Distortion
+              this.effects.push(new Distortion(this.audioContext,e))
               break;
               case "reverb":
-                e.class = Reverb
+                this.effects.push(new Reverb(this.audioContext,e))
                 break;
                 case "equalizer":
-                  e.class = Equalizer
+                  this.effects.push(new Equalizer(this.audioContext,e))
                   break;
         }
        })
@@ -61,11 +57,9 @@ class Amplifier{
       }
       this.effects = this.effectsDisconnect();
       
-      this.default.forEach(e=>{
-        console.log(e);
-        this.effects.push(new e.class(this.audioContext,e))
-      })
-   
+      this.mapClasses(this.default);
+      this.data = this.default;
+      this.default = JSON.parse(JSON.stringify(this.data))
       this.effects[0].set_input(this.output);
       this.effectsConnect();
       
@@ -156,7 +150,7 @@ class Amplifier{
           }
           );
         this.effects[this.effects.length-1].data= this.data[this.data.length-2];
-        console.log(this.data)
+        console.log(this.data,this.default)
         this.effectsConnect();
         // console.log(this.effects);
       
